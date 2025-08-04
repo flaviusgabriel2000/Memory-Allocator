@@ -1,0 +1,18 @@
+// Usturoi Flavius-Gabriel, 336CC
+// Tema 2 - Memory Allocator
+
+	Alocatorul de memorie pe care l-am realizat a pornit de la implementarea
+minimala oferita in sectiunea de resurse din enuntul temei si anume Malloc Tutorial.
+Aceasta se foloseste de aceeasi structura pentru metadate oferita in schelet, struct
+block_meta, asa ca am considerat a fi un bun punct de plecare in realizarea temei.
+Ideea de baza este simpla: in functia malloc() se verifica initial daca head-ul listei
+globale este NULL. In caz afirmativ, inseamna ca este prima data cand se intra in functie.
+Altfel, se parcurge lista de blocuri de memorie si se cauta un bloc FREE care sa satisfaca
+constrangerile de dimensiune. Daca s-a gasit un bloc potrivit, i se schimba statusul din FREE
+in ALLOC. Daca nu s-a gasit nimic, inseamna ca efectiv trebuie sa alocam memorie, folo-
+sind sbrk() sau mmap(), in functie de dimensiunea solicitata.
+	Acesta constituie principiul minimal de functionare al malloc-ului. Mai departe,
+l-am adaptat in functie de conditiile din enuntul temei si anume alinierea block_meta si
+a payload-ului la 8 bytes (formulele de calcul au fost inspirate din al doilea articol
+din Resurse), prealocarea heap-ului (in functie de valoarea variabilei heap_preallocated),
+tehnici de trunchiere a blocurior si imbinarea blocurilor free adiacente, etc. 
