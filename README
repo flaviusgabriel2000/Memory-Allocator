@@ -1,18 +1,15 @@
-// Usturoi Flavius-Gabriel, 336CC
-// Tema 2 - Memory Allocator
+// Memory Allocator
 
-	Alocatorul de memorie pe care l-am realizat a pornit de la implementarea
-minimala oferita in sectiunea de resurse din enuntul temei si anume Malloc Tutorial.
-Aceasta se foloseste de aceeasi structura pentru metadate oferita in schelet, struct
-block_meta, asa ca am considerat a fi un bun punct de plecare in realizarea temei.
-Ideea de baza este simpla: in functia malloc() se verifica initial daca head-ul listei
-globale este NULL. In caz afirmativ, inseamna ca este prima data cand se intra in functie.
-Altfel, se parcurge lista de blocuri de memorie si se cauta un bloc FREE care sa satisfaca
-constrangerile de dimensiune. Daca s-a gasit un bloc potrivit, i se schimba statusul din FREE
-in ALLOC. Daca nu s-a gasit nimic, inseamna ca efectiv trebuie sa alocam memorie, folo-
-sind sbrk() sau mmap(), in functie de dimensiunea solicitata.
-	Acesta constituie principiul minimal de functionare al malloc-ului. Mai departe,
-l-am adaptat in functie de conditiile din enuntul temei si anume alinierea block_meta si
-a payload-ului la 8 bytes (formulele de calcul au fost inspirate din al doilea articol
-din Resurse), prealocarea heap-ului (in functie de valoarea variabilei heap_preallocated),
-tehnici de trunchiere a blocurior si imbinarea blocurilor free adiacente, etc. 
+	The basic idea is simple: in the malloc() function, it is
+initially checked whether the head of the global list is NULL.
+If so, it means that this is the first time the function is entered.
+Otherwise, the list of memory blocks is traversed and a FREE block
+is searched for that satisfies the size constraints. If a suitable block
+is found, its status is changed from FREE to ALLOC. If nothing is found,
+it means that we actually have to allocate memory, using sbrk() or mmap(),
+depending on the requested size.
+	This is the minimal operating principle of malloc. Furthermore,
+I adapted it according to the conditions in the theme statement, namely the
+alignment of block_meta and the payload to 8 bytes, heap preallocation (depending
+on the value of the heap_preallocated variable), block truncation techniques and
+merging adjacent free blocks, etc.
